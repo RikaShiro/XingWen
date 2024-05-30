@@ -71,7 +71,7 @@
 
 <script setup>
 import { ref } from 'vue';
-const selectedKeys1 = ref(['2']);
+const selectedKeys1 = ref(['1']);
 const selectedKeys2 = ref(['1']);
 const openKeys = ref(['sub1']);
 </script>
