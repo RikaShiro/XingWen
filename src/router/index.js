@@ -1,13 +1,11 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import TeacherView from '../views/TeacherView.vue'
 
 const router = createRouter({
 	history: createWebHistory(import.meta.env.BASE_URL),
 	routes: [
 		{
 			path: '/',
-			name: 'teacher',
-			component: TeacherView,
+			redirect: '/school',
 		},
 		{
 			path: '/teacher',
