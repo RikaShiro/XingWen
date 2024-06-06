@@ -2,11 +2,11 @@
   <a-layout id="layout">
 
     <a-layout-header class="header">
-      <div class="logo" />
+      <!-- <div class="logo"></div> -->
       <a-menu v-model:selectedKeys="selectedKeys1" theme="dark" mode="horizontal" :style="{ lineHeight: '64px' }">
-        <a-menu-item key="1"><router-link to="/school">School</router-link></a-menu-item>
-        <a-menu-item key="2"><router-link to="/teacher">Teacher</router-link></a-menu-item>
-        <a-menu-item key="3"><router-link to="/student">Student</router-link></a-menu-item>
+        <a-menu-item key="school"><router-link to="/school">School</router-link></a-menu-item>
+        <a-menu-item key="teacher"><router-link to="/teacher">Teacher</router-link></a-menu-item>
+        <a-menu-item key="student"><router-link to="/student">Student</router-link></a-menu-item>
       </a-menu>
     </a-layout-header>
 
@@ -54,11 +54,11 @@
       </a-layout-sider>
 
       <a-layout style="padding: 0 24px 24px">
-        <a-breadcrumb style="margin: 16px 0">
+        <!-- <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>Home</a-breadcrumb-item>
           <a-breadcrumb-item>List</a-breadcrumb-item>
           <a-breadcrumb-item>App</a-breadcrumb-item>
-        </a-breadcrumb>
+        </a-breadcrumb> -->
 
         <a-layout-content :style="{ background: '#fff', padding: '24px', margin: 0, minHeight: '280px' }">
           <router-view></router-view>
@@ -71,13 +71,20 @@
 
 <script setup>
 import { ref } from 'vue';
-const selectedKeys1 = ref(['1']);
+
+const selectedKeys1 = ref(['teacher']);
 const selectedKeys2 = ref(['1']);
 const openKeys = ref(['sub1']);
 </script>
 
 <style scoped>
-#components-layout-demo-top-side-2 .logo {
+.site-layout-content {
+  min-height: 280px;
+  padding: 24px;
+  background: #fff;
+}
+
+#components-layout-demo-top .logo {
   float: left;
   width: 120px;
   height: 31px;
@@ -85,12 +92,12 @@ const openKeys = ref(['sub1']);
   background: rgba(255, 255, 255, 0.3);
 }
 
-.ant-row-rtl #components-layout-demo-top-side-2 .logo {
+.ant-row-rtl #components-layout-demo-top .logo {
   float: right;
   margin: 16px 0 16px 24px;
 }
 
-.site-layout-background {
-  background: #fff;
+[data-theme='dark'] .site-layout-content {
+  background: #141414;
 }
 </style>
