@@ -1,20 +1,18 @@
 <template>
-  <a-space>
-    <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @focus="focus"
-      @change="handleChange">
-    </a-select>
-  </a-space>
+  <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @focus="focus"
+    @change="handleChange" class="row">
+  </a-select>
 
-  <TestTable :columns="knowledgePointColumns" :data="knowledgePointData" dataIndex="knowledgePoint">
+  <TestTable :columns="knowledgePointColumns" :data="knowledgePointData" dataIndex="knowledgePoint" class="row">
   </TestTable>
 
-  <TestTable :columns="abilityColumns" :data="abilityData" dataIndex="ability">
+  <TestTable :columns="abilityColumns" :data="abilityData" dataIndex="ability" class="row">
   </TestTable>
 </template>
 
 <script setup>
 import TestTable from '@/components/TestTable.vue'
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const knowledgePointColumns = [
   {
@@ -33,7 +31,7 @@ const knowledgePointColumns = [
     key: 'historicalAccuracy',
     customRender: (text) => `${text.value}%`
   }
-];
+]
 
 const knowledgePointData = ref([
   {
@@ -61,7 +59,7 @@ const knowledgePointData = ref([
     lostPoint: 2,
     historicalAccuracy: 80.29,
   }
-]);
+])
 
 const abilityColumns = [
   {
@@ -105,8 +103,8 @@ function randomArr(arr) {
   }
 }
 
-const value = ref(4);
-const options = ref([]);
+const value = ref(4)
+const options = ref([])
 for (let i = 1; i < 12; i++) {
   options.value.push({
     value: i,
@@ -114,10 +112,16 @@ for (let i = 1; i < 12; i++) {
   })
 }
 const focus = () => {
-  console.log('focus');
-};
+  console.log('focus')
+}
 const handleChange = () => {
   randomArr(knowledgePointData)
   randomArr(abilityData)
-};
+}
 </script>
+
+<style scoped>
+.row {
+  margin-bottom: 24px;
+}
+</style>

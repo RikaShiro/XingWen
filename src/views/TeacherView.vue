@@ -1,13 +1,12 @@
 <template>
-  <a-space>
-    <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @focus="focus"
-      @change="handleChange">
-    </a-select>
-  </a-space>
+  <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @focus="focus"
+    @change="handleChange" class="row">
+  </a-select>
 
-  <TestTable :columns="reasonColumns" :data="reasonData">
+  <TestTable :columns="reasonColumns" :data="reasonData" class="row">
   </TestTable>
-  <TestTable :columns="lostPointColumns" :data="lostPointData" dataIndex="lostPoint">
+
+  <TestTable :columns="lostPointColumns" :data="lostPointData" dataIndex="lostPoint" class="row">
   </TestTable>
 
   <StudentTable :columns="studentColumns" :data="studentData" dataIndex="studentID">
@@ -17,7 +16,7 @@
 <script setup>
 import TestTable from '@/components/TestTable.vue'
 import StudentTable from '@/components/StudentTable.vue'
-import { ref } from 'vue';
+import { ref } from 'vue'
 
 const lostPointColumns = [
   {
@@ -31,7 +30,7 @@ const lostPointColumns = [
     key: 'lostRate',
     customRender: (text) => `${text.value}%`
   },
-];
+]
 
 const lostPointData = ref([
   {
@@ -54,7 +53,7 @@ const lostPointData = ref([
     lostPoint: '战后世界经济',
     lostRate: 80.29,
   }
-]);
+])
 
 function randomArr(arr) {
   const n = arr.value.length
@@ -67,8 +66,8 @@ function randomArr(arr) {
   }
 }
 
-const value = ref(8);
-const options = ref([]);
+const value = ref(8)
+const options = ref([])
 for (let i = 1; i < 12; i++) {
   options.value.push({
     value: i,
@@ -76,12 +75,12 @@ for (let i = 1; i < 12; i++) {
   })
 }
 const focus = () => {
-  console.log('focus');
-};
+  console.log('focus')
+}
 const handleChange = () => {
   randomArr(lostPointData)
   randomArr(reasonData)
-};
+}
 
 const reasonColumns = [
   {
@@ -168,7 +167,7 @@ const surnames = [
   '林 (Lin)',
   '高 (Gao)',
   '郑 (Zheng)'
-];
+]
 
 const givenNames = [
   '沐宸 (Mùchén)',
@@ -185,7 +184,7 @@ const givenNames = [
   '语桐 (Yǔtóng)',
   '沐阳 (Mùyáng)',
   '语汐 (Yǔxī)',
-];
+]
 
 function randomName() {
   const p = parseInt(Math.random() * surnames.length)
@@ -202,3 +201,9 @@ for (let i = 0; i < 60; i++) {
   studentData.value.push(randomName())
 }
 </script>
+
+<style scoped>
+.row {
+  margin-bottom: 24px;
+}
+</style>
