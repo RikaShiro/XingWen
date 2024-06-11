@@ -1,9 +1,7 @@
 <template>
   <a-table :columns="columns" :data-source="data" :pagination="false" :scroll="{ y: 320 }">
     <template #bodyCell="{ column, text }">
-      <template v-if="column.dataIndex === dataIndex">
-        <router-link>{{ text }}</router-link>
-      </template>
+      {{ text }}
     </template>
   </a-table>
 </template>

@@ -1,0 +1,1 @@
+import{o,c as s,w as c,a as n,t as l,r}from"./index-C51JLzsH.js";const p={__name:"TestTable",props:["columns","data","dataIndex"],setup(a){return(m,u)=>{const t=r("a-table");return o(),s(t,{columns:a.columns,"data-source":a.data,pagination:!1,scroll:{y:320}},{bodyCell:c(({column:_,text:e})=>[n(l(e),1)]),_:1},8,["columns","data-source"])}}};export{p as _};
