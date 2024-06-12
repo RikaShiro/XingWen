@@ -3,19 +3,22 @@
     @change="handleChange" class="row">
   </a-select>
 
-  <TestTable :columns="reasonColumns" :data="reasonData" class="row">
-  </TestTable>
+  <a-table :columns="reasonColumns" :data-source="reasonData" :pagination="false" :scroll="{ y: 320 }" class="row">
+  </a-table>
 
-  <TestTable :columns="lostPointColumns" :data="lostPointData" dataIndex="lostPoint" class="row">
-  </TestTable>
+  <a-table :columns="lostPointColumns" :data-source="lostPointData" :pagination="false" :scroll="{ y: 320 }"
+    class="row"></a-table>
 
-  <StudentTable :columns="studentColumns" :data="studentData" dataIndex="studentID">
-  </StudentTable>
+  <a-table :columns="studentColumns" :data-source="studentData" :pagination="false" :scroll="{ y: 320 }">
+    <template #bodyCell="{ column, record }">
+      <template v-if="column.key === 'studentID'">
+        <router-link :to="'/student/' + record.studentID">{{ record.studentID }}</router-link>
+      </template>
+    </template>
+  </a-table>
 </template>
 
 <script setup>
-import TestTable from '@/components/TestTable.vue'
-import StudentTable from '@/components/StudentTable.vue'
 import { ref } from 'vue'
 
 const lostPointColumns = [
@@ -84,40 +87,48 @@ const handleChange = () => {
 
 const reasonColumns = [
   {
+    title: '题号',
+    dataIndex: 'questionIndex',
+    key: 'questionIndex',
+  },
+  {
     title: '得分率',
     dataIndex: 'correctRate',
     key: 'correctRate',
     customRender: (text) => `${text.value}%`
   },
   {
-    title: '题目理解',
-    dataIndex: 'understanding',
-    key: 'understanding',
-    customRender: (text) => parseInt(text.value * 0.3)
-  },
-  {
-    title: '记忆缺失',
-    dataIndex: 'memory',
-    key: 'memory',
-    customRender: (text) => parseInt(text.value * 0.3)
-  },
-  {
-    title: '知识点理解错误',
-    dataIndex: 'knowledgePoint',
-    key: 'knowledgePoint',
-    customRender: (text) => parseInt(text.value * 0.3)
-  },
-  {
-    title: '缺乏知识体系',
-    dataIndex: 'system',
-    key: 'system',
-    customRender: (text) => parseInt(text.value * 0.3)
-  },
-  {
-    title: '解题技巧',
-    dataIndex: 'technique',
-    key: 'technique',
-    customRender: (text) => parseInt(text.value * 0.3)
+    title: '错因统计(错误人数)',
+    children: [{
+      title: '题目理解',
+      dataIndex: 'understanding',
+      key: 'understanding',
+      customRender: (text) => parseInt(text.value * 0.3)
+    },
+    {
+      title: '记忆缺失',
+      dataIndex: 'memory',
+      key: 'memory',
+      customRender: (text) => parseInt(text.value * 0.3)
+    },
+    {
+      title: '知识点理解错误',
+      dataIndex: 'knowledgePoint',
+      key: 'knowledgePoint',
+      customRender: (text) => parseInt(text.value * 0.3)
+    },
+    {
+      title: '缺乏知识体系',
+      dataIndex: 'system',
+      key: 'system',
+      customRender: (text) => parseInt(text.value * 0.3)
+    },
+    {
+      title: '解题技巧',
+      dataIndex: 'technique',
+      key: 'technique',
+      customRender: (text) => parseInt(text.value * 0.3)
+    }]
   },
 ]
 const reasonData = ref([])
@@ -132,6 +143,9 @@ for (let i = 0; i < 30; i++) {
   })
 }
 randomArr(reasonData)
+for (let i = 0; i < 30; i++) {
+  reasonData.value[i].questionIndex = (i + 1).toString()
+}
 
 const studentColumns = [
   {

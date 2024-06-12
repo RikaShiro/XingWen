@@ -3,16 +3,23 @@
     @change="handleChange" class="row">
   </a-select>
 
-  <TestTable :columns="knowledgePointColumns" :data="knowledgePointData" dataIndex="knowledgePoint" class="row">
-  </TestTable>
+  <a-table :columns="knowledgePointColumns" :data-source="knowledgePointData" :pagination="false" :scroll="{ y: 320 }"
+    class="row">
+  </a-table>
 
-  <TestTable :columns="abilityColumns" :data="abilityData" dataIndex="ability" class="row">
-  </TestTable>
+  <a-table :columns="abilityColumns" :data-source="abilityData" :pagination="false" :scroll="{ y: 320 }" class="row">
+  </a-table>
+
+  <Pie :data="pieChartData" :options="pieChartOptions" class="pieChart" />
 </template>
 
 <script setup>
-import TestTable from '@/components/TestTable.vue'
 import { ref } from 'vue'
+
+import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
+import { Pie } from 'vue-chartjs'
+
+ChartJS.register(ArcElement, Tooltip, Legend)
 
 const knowledgePointColumns = [
   {
@@ -118,10 +125,30 @@ const handleChange = () => {
   randomArr(knowledgePointData)
   randomArr(abilityData)
 }
+
+const pieChartData = ref({
+  labels: ['阐释事务能力', '探讨问题能力', '运用知识能力', '解读信息能力'],
+  datasets: [
+    {
+      backgroundColor: ['#41B883', '#E46651', '#00D8FF', '#DD1B16'],
+      data: [40, 20, 80, 10]
+    }
+  ]
+})
+
+const pieChartOptions = ref({
+  responsive: true,
+  maintainAspectRatio: true
+})
 </script>
 
 <style scoped>
 .row {
   margin-bottom: 24px;
+}
+
+.pieChart {
+  max-width: 600px;
+  align-self: center;
 }
 </style>
