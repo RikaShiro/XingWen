@@ -87,7 +87,7 @@ const handleChange = () => {
 
 const reasonColumns = [
   {
-    title: '题号',
+    title: '序号',
     dataIndex: 'questionIndex',
     key: 'questionIndex',
   },
