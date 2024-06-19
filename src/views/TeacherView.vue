@@ -4,6 +4,18 @@
   </a-select>
 
   <a-table :columns="reasonColumns" :data-source="reasonData" :pagination="false" :scroll="{ y: 320 }" class="row">
+    <template #bodyCell="{ text, record, column }">
+      <template v-if="column.dataIndex === 'correctRate'">
+        <span :class="getColor(text)">{{ text.toFixed(2) }}%</span>
+      </template>
+      <template
+        v-else-if="['understanding', 'memory', 'knowledgePoint', 'system', 'technique'].includes(column.dataIndex)">
+        <span :class="isLargest(record, text)">{{ parseInt(text * 0.3) }}</span>
+      </template>
+      <template v-else>
+        {{ text }}
+      </template>
+    </template>
   </a-table>
 
   <a-table :columns="lostPointColumns" :data-source="lostPointData" :pagination="false" :scroll="{ y: 320 }"
@@ -16,10 +28,25 @@
       </template>
     </template>
   </a-table>
+
+  <Line :data="chartData" :options="chartOptions" class="line-chart" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
+
+import {
+  Chart as ChartJS,
+  LineElement,
+  LinearScale,
+  PointElement,
+  Tooltip,
+  Legend,
+  CategoryScale,
+  elements,
+} from 'chart.js'
+import { Line } from 'vue-chartjs';
+ChartJS.register(LineElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement,)
 
 const lostPointColumns = [
   {
@@ -85,6 +112,29 @@ const handleChange = () => {
   randomArr(reasonData)
 }
 
+function getColor(correctRate) {
+  if (correctRate <= 30) {
+    return 'below-30 white-text';
+  } else if (correctRate <= 50) {
+    return 'below-50 white-text'
+  } else {
+    return 'normal'
+  }
+}
+
+function isLargest(record, text) {
+  const arr = Object.values(record)
+  arr.shift()
+  arr.pop()
+
+  const max = Math.max(...arr)
+  if (max === text) {
+    return 'largest'
+  } else {
+    return 'non-largest'
+  }
+}
+
 const reasonColumns = [
   {
     title: '序号',
@@ -95,39 +145,40 @@ const reasonColumns = [
     title: '得分率',
     dataIndex: 'correctRate',
     key: 'correctRate',
-    customRender: (text) => `${text.value}%`
+    // customRender: (text) => `${text.value}%`
   },
   {
     title: '错因统计(错误人数)',
+    dataIndex: 'count',
     children: [{
       title: '题目理解',
       dataIndex: 'understanding',
       key: 'understanding',
-      customRender: (text) => parseInt(text.value * 0.3)
+      // customRender: (text) => parseInt(text.value * 0.3)
     },
     {
       title: '记忆缺失',
       dataIndex: 'memory',
       key: 'memory',
-      customRender: (text) => parseInt(text.value * 0.3)
+      // customRender: (text) => parseInt(text.value * 0.3)
     },
     {
       title: '知识点理解错误',
       dataIndex: 'knowledgePoint',
       key: 'knowledgePoint',
-      customRender: (text) => parseInt(text.value * 0.3)
+      // customRender: (text) => parseInt(text.value * 0.3)
     },
     {
       title: '缺乏知识体系',
       dataIndex: 'system',
       key: 'system',
-      customRender: (text) => parseInt(text.value * 0.3)
+      // customRender: (text) => parseInt(text.value * 0.3)
     },
     {
       title: '解题技巧',
       dataIndex: 'technique',
       key: 'technique',
-      customRender: (text) => parseInt(text.value * 0.3)
+      // customRender: (text) => parseInt(text.value * 0.3)
     }]
   },
 ]
@@ -214,10 +265,54 @@ const studentData = ref([])
 for (let i = 0; i < 60; i++) {
   studentData.value.push(randomName())
 }
+
+const chartData = ref({
+  labels: ['题目理解', '记忆缺失', '知识点理解', '缺乏知识体系', '解题技巧'],
+  datasets: [
+    {
+      label: '一班',
+      backgroundColor: '#f87979',
+      borderColor: '#f87979',
+      data: [40, 39, 10, 40, 39, 80, 40]
+    },
+    {
+      label: '二班',
+      backgroundColor: '#087909',
+      borderColor: '#087909',
+      data: [20, 8, 18, 40, 8, 4, 20]
+    }
+  ]
+})
+const chartOptions = ref({
+  responsive: true,
+})
 </script>
 
 <style scoped>
 .row {
   margin-bottom: 24px;
+}
+
+.white-text {
+  color: white;
+}
+
+.largest {
+  color: #8B0000;
+  font-weight: bold;
+}
+
+.below-30 {
+  background-color: #8B0000;
+  font-weight: bold;
+}
+
+.below-50 {
+  background-color: #FF7F7F;
+  font-weight: bold;
+}
+
+.line-chart td {
+  border-right: none;
 }
 </style>
