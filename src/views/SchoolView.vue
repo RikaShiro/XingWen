@@ -1,14 +1,9 @@
 <template>
-  <Bar id="grade-distribution" :options="gradeOptions" :data="gradeData" />
-  <Bar id="class-distribution" :options="classOptions" :data="classData" />
+
 </template>
 
 <script setup>
 import { ref } from 'vue'
-import { Bar } from 'vue-chartjs'
-import { Chart as ChartJS, Title, Tooltip, BarElement, CategoryScale, LinearScale } from 'chart.js'
-
-ChartJS.register(Title, Tooltip, BarElement, CategoryScale, LinearScale)
 
 const gradeData = ref({
   labels: ['90-100', '80-89', '70-79', '60-69', '60-0'],

@@ -29,24 +29,130 @@
     </template>
   </a-table>
 
-  <Line :data="chartData" :options="chartOptions" class="line-chart" />
+  <v-chart class="chart" :options="barChartOptions" />
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref } from 'vue';
+// import { use } from "echarts/core";
+// import { CanvasRenderer } from "echarts/renderers";
+// import { BarChart } from "echarts/charts";
+// import {
+//   TitleComponent,
+//   TooltipComponent,
+//   GridComponent,
+//   XAxisComponent,
+//   YAxisComponent,
+//   LegendComponent
+// } from "echarts/components";
+// import VChart, { THEME_KEY } from "vue-echarts";
+// import { provide } from "vue";
 
-import {
-  Chart as ChartJS,
-  LineElement,
-  LinearScale,
-  PointElement,
-  Tooltip,
-  Legend,
-  CategoryScale,
-  elements,
-} from 'chart.js'
-import { Line } from 'vue-chartjs';
-ChartJS.register(LineElement, Tooltip, Legend, CategoryScale, LinearScale, PointElement,)
+// use([
+//   CanvasRenderer,
+//   BarChart,
+//   TitleComponent,
+//   TooltipComponent,
+//   GridComponent,
+//   XAxisComponent,
+//   YAxisComponent,
+//   LegendComponent
+// ]);
+
+// provide(THEME_KEY, "dark");
+
+const barChartOptions = ref({
+  title: {
+    text: "Traffic Sources",
+    left: "center"
+  },
+  tooltip: {
+    trigger: "axis",
+    axisPointer: {
+      type: "shadow"
+    }
+  },
+  legend: {
+    data: ["Direct", "Mail Ad", "Affiliate Ad", "Video Ad", "Search Engine"],
+    left: "center",
+    top: "bottom"
+  },
+  grid: {
+    left: "3%",
+    right: "4%",
+    bottom: "3%",
+    containLabel: true
+  },
+  xAxis: {
+    type: "value"
+  },
+  yAxis: {
+    type: "category",
+    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
+  },
+  series: [
+    {
+      name: "Direct",
+      type: "bar",
+      stack: "total",
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: "series"
+      },
+      data: [320, 302, 301, 334, 390, 330, 320]
+    },
+    {
+      name: "Mail Ad",
+      type: "bar",
+      stack: "total",
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: "series"
+      },
+      data: [120, 132, 101, 134, 90, 230, 210]
+    },
+    {
+      name: "Affiliate Ad",
+      type: "bar",
+      stack: "total",
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: "series"
+      },
+      data: [220, 182, 191, 234, 290, 330, 310]
+    },
+    {
+      name: "Video Ad",
+      type: "bar",
+      stack: "total",
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: "series"
+      },
+      data: [150, 212, 201, 154, 190, 330, 410]
+    },
+    {
+      name: "Search Engine",
+      type: "bar",
+      stack: "total",
+      label: {
+        show: true
+      },
+      emphasis: {
+        focus: "series"
+      },
+      data: [820, 832, 901, 934, 1290, 1330, 1320]
+    }
+  ]
+});
 
 const lostPointColumns = [
   {
@@ -265,27 +371,6 @@ const studentData = ref([])
 for (let i = 0; i < 60; i++) {
   studentData.value.push(randomName())
 }
-
-const chartData = ref({
-  labels: ['题目理解', '记忆缺失', '知识点理解', '缺乏知识体系', '解题技巧'],
-  datasets: [
-    {
-      label: '一班',
-      backgroundColor: '#f87979',
-      borderColor: '#f87979',
-      data: [40, 39, 10, 40, 39, 80, 40]
-    },
-    {
-      label: '二班',
-      backgroundColor: '#087909',
-      borderColor: '#087909',
-      data: [20, 8, 18, 40, 8, 4, 20]
-    }
-  ]
-})
-const chartOptions = ref({
-  responsive: true,
-})
 </script>
 
 <style scoped>

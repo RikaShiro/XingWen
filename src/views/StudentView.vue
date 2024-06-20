@@ -9,17 +9,10 @@
 
   <a-table :columns="abilityColumns" :data-source="abilityData" :pagination="false" :scroll="{ y: 320 }" class="row">
   </a-table>
-
-  <Pie :data="pieChartData" :options="pieChartOptions" class="pieChart" />
 </template>
 
 <script setup>
 import { ref } from 'vue'
-
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js'
-import { Pie } from 'vue-chartjs'
-
-ChartJS.register(ArcElement, Tooltip, Legend)
 
 const knowledgePointColumns = [
   {
