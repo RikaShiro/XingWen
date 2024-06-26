@@ -1,4 +1,6 @@
 <template>
+  <CompareClassReason class="row compare-class-reason"></CompareClassReason>
+
   <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @focus="focus"
     @change="handleChange" class="row">
   </a-select>
@@ -21,138 +23,18 @@
   <a-table :columns="lostPointColumns" :data-source="lostPointData" :pagination="false" :scroll="{ y: 320 }"
     class="row"></a-table>
 
-  <a-table :columns="studentColumns" :data-source="studentData" :pagination="false" :scroll="{ y: 320 }">
+  <a-table :columns="studentColumns" :data-source="studentData" :pagination="false" :scroll="{ y: 320 }" class="row">
     <template #bodyCell="{ column, record }">
       <template v-if="column.key === 'studentID'">
         <router-link :to="'/student/' + record.studentID">{{ record.studentID }}</router-link>
       </template>
     </template>
   </a-table>
-
-  <v-chart class="chart" :options="barChartOptions" />
 </template>
 
 <script setup>
+import CompareClassReason from '@/components/CompareClassReason.vue';
 import { ref } from 'vue';
-// import { use } from "echarts/core";
-// import { CanvasRenderer } from "echarts/renderers";
-// import { BarChart } from "echarts/charts";
-// import {
-//   TitleComponent,
-//   TooltipComponent,
-//   GridComponent,
-//   XAxisComponent,
-//   YAxisComponent,
-//   LegendComponent
-// } from "echarts/components";
-// import VChart, { THEME_KEY } from "vue-echarts";
-// import { provide } from "vue";
-
-// use([
-//   CanvasRenderer,
-//   BarChart,
-//   TitleComponent,
-//   TooltipComponent,
-//   GridComponent,
-//   XAxisComponent,
-//   YAxisComponent,
-//   LegendComponent
-// ]);
-
-// provide(THEME_KEY, "dark");
-
-const barChartOptions = ref({
-  title: {
-    text: "Traffic Sources",
-    left: "center"
-  },
-  tooltip: {
-    trigger: "axis",
-    axisPointer: {
-      type: "shadow"
-    }
-  },
-  legend: {
-    data: ["Direct", "Mail Ad", "Affiliate Ad", "Video Ad", "Search Engine"],
-    left: "center",
-    top: "bottom"
-  },
-  grid: {
-    left: "3%",
-    right: "4%",
-    bottom: "3%",
-    containLabel: true
-  },
-  xAxis: {
-    type: "value"
-  },
-  yAxis: {
-    type: "category",
-    data: ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
-  },
-  series: [
-    {
-      name: "Direct",
-      type: "bar",
-      stack: "total",
-      label: {
-        show: true
-      },
-      emphasis: {
-        focus: "series"
-      },
-      data: [320, 302, 301, 334, 390, 330, 320]
-    },
-    {
-      name: "Mail Ad",
-      type: "bar",
-      stack: "total",
-      label: {
-        show: true
-      },
-      emphasis: {
-        focus: "series"
-      },
-      data: [120, 132, 101, 134, 90, 230, 210]
-    },
-    {
-      name: "Affiliate Ad",
-      type: "bar",
-      stack: "total",
-      label: {
-        show: true
-      },
-      emphasis: {
-        focus: "series"
-      },
-      data: [220, 182, 191, 234, 290, 330, 310]
-    },
-    {
-      name: "Video Ad",
-      type: "bar",
-      stack: "total",
-      label: {
-        show: true
-      },
-      emphasis: {
-        focus: "series"
-      },
-      data: [150, 212, 201, 154, 190, 330, 410]
-    },
-    {
-      name: "Search Engine",
-      type: "bar",
-      stack: "total",
-      label: {
-        show: true
-      },
-      emphasis: {
-        focus: "series"
-      },
-      data: [820, 832, 901, 934, 1290, 1330, 1320]
-    }
-  ]
-});
 
 const lostPointColumns = [
   {
@@ -399,5 +281,9 @@ for (let i = 0; i < 60; i++) {
 
 .line-chart td {
   border-right: none;
+}
+
+.compare-class-reason {
+  /* height: unset !important; */
 }
 </style>

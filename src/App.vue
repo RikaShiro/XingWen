@@ -53,7 +53,7 @@
         </a-menu>
       </a-layout-sider>
 
-      <a-layout style="padding: 0 24px 24px">
+      <a-layout style="padding: 0 24px">
         <!-- <a-breadcrumb style="margin: 16px 0">
           <a-breadcrumb-item>Home</a-breadcrumb-item>
           <a-breadcrumb-item>List</a-breadcrumb-item>
