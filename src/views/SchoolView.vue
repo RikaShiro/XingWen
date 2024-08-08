@@ -1,17 +1,29 @@
 <template>
   <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @change="$emit('refresh')"
-    class="row">
+    class="exam-select">
   </a-select>
 
-  <GradeDistributionBarChart class="row"></GradeDistributionBarChart>
-  <CompareClassDistributionBarChart class="row"></CompareClassDistributionBarChart>
+  <a-select ref="select" :options="modeOptions" v-model:value="modeValue" style="width: 300px" @focus="focus"
+    @change="handleChange" class="mode-select">
+  </a-select>
 
-  <div class="lost-point-tables-container">
+  <div class="grid-column-2">
+    <GradeDistributionBarChart class="chart"></GradeDistributionBarChart>
+    <CompareClassDistributionBarChart class="chart"></CompareClassDistributionBarChart>
+  </div>
+
+  <div class="grid-column-4">
     <LostPointTable class="lost-point-table"></LostPointTable>
     <LostPointTable class="lost-point-table"></LostPointTable>
     <LostPointTable class="lost-point-table"></LostPointTable>
     <LostPointTable class="lost-point-table"></LostPointTable>
   </div>
+
+  <div class="grid-column-2">
+    <CompareClassReasonLineChart class="compare-class-reason"></CompareClassReasonLineChart>
+    <CompareClassReasonLineChart class="compare-class-reason"></CompareClassReasonLineChart>
+  </div>
+
 </template>
 
 <script setup>
@@ -20,6 +32,7 @@ import { ref, provide } from 'vue';
 import CompareClassDistributionBarChart from '@/components/CompareClassDistributionBarChart.vue'
 import GradeDistributionBarChart from '@/components/GradeDistributionBarChart.vue'
 import LostPointTable from '@/components/LostPointTable.vue';
+import CompareClassReasonLineChart from '@/components/CompareClassReasonLineChart.vue';
 
 const value = ref(8)
 const options = ref([])
@@ -30,26 +43,52 @@ for (let i = 1; i < 12; i++) {
   })
 }
 
-// provide('refresh', (arr) => {
-//   const n = arr.value.length
-//   for (let i = 0; i < n; i++) {
-//     for (const k in arr.value[i]) {
-//       if (typeof arr.value[i][k] === 'number') {
-//         arr.value[i][k] = Number((Math.random(Date.now()) * 100).toFixed(2))
-//       }
-//     }
-//   }
-// })
+const modeValue = ref(0)
+const modeOptions = ref([
+  {
+    value: 0,
+    label: '按班级序号查看'
+  },
+  {
+    value: 1,
+    label: '按平均分排名查看'
+  },
+  {
+    value: 2,
+    label: '按同类班级查看'
+  },
+  {
+    value: 3,
+    label: '按师徒班级查看'
+  },
+])
+
 </script>
 
 <style scoped>
-.lost-point-tables-container {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 4% 30px;
+.mode-select {
+  margin-left: 20px;
+  margin-bottom: 20px;
 }
 
-.row {
+div.grid-column-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  margin-top: 24px;
   margin-bottom: 24px;
+}
+
+.chart {
+  height: 50vh;
+}
+
+div.grid-column-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.lost-point-table {
+  border: 1px solid black;
 }
 </style>

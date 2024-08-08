@@ -13,8 +13,8 @@ import {
   GridComponent,
   ToolboxComponent
 } from 'echarts/components';
-import VChart, { THEME_KEY } from 'vue-echarts';
-import { ref, provide } from 'vue';
+import VChart from 'vue-echarts';
+import { ref } from 'vue';
 
 use([
   CanvasRenderer,
@@ -86,9 +86,3 @@ const option = ref({
   ]
 });
 </script>
-
-<style scoped>
-.chart {
-  max-height: 50vh;
-}
-</style>

@@ -1,9 +1,7 @@
 <template>
-  <a-select ref="select" :options="modeOptions" v-model:value="modeValue" style="width: 300px" @focus="focus"
-    @change="handleChange" class="row">
-  </a-select>
 
-  <CompareClassReasonLineChart class="row compare-class-reason"></CompareClassReasonLineChart>
+
+
 
   <a-select ref="select" :options="options" v-model:value="value" style="width: 300px" @focus="focus"
     @change="handleChange" class="row">
@@ -34,28 +32,8 @@
 </template>
 
 <script setup>
-import CompareClassReasonLineChart from '@/components/CompareClassReasonLineChart.vue';
-import { ref } from 'vue';
 
-const modeValue = ref(0)
-const modeOptions = ref([
-  {
-    value: 0,
-    label: '按班级序号查看'
-  },
-  {
-    value: 1,
-    label: '按平均分排名查看'
-  },
-  {
-    value: 2,
-    label: '按同类班级查看'
-  },
-  {
-    value: 3,
-    label: '按师徒班级查看'
-  },
-])
+import { ref } from 'vue';
 
 function randomArr(arr) {
   const n = arr.value.length

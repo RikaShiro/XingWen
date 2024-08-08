@@ -12,8 +12,8 @@ import {
   LegendComponent,
   GridComponent
 } from 'echarts/components';
-import VChart, { THEME_KEY } from 'vue-echarts';
-import { ref, provide } from 'vue';
+import VChart from 'vue-echarts';
+import { ref } from 'vue';
 
 use([
   CanvasRenderer,
@@ -24,11 +24,11 @@ use([
   GridComponent
 ]);
 
-// provide(THEME_KEY, 'dark');
-
 const option = ref({
   title: {
-    text: '各班级分数段分布占比'
+    text: '各班级分数段分布占比',
+    left: 'center',
+    top: 0
   },
   tooltip: {
     trigger: 'axis',
@@ -37,8 +37,11 @@ const option = ref({
       type: 'shadow' // 'shadow' as default; can also be 'line' or 'shadow'
     }
   },
-  legend: {},
+  legend: {
+    top: 40
+  },
   grid: {
+    top: 80,
     left: '3%',
     right: '4%',
     bottom: '3%',
@@ -46,6 +49,7 @@ const option = ref({
   },
   xAxis: {
     type: 'value',
+    max: 100
   },
   yAxis: {
     type: 'category',
@@ -120,9 +124,3 @@ const option = ref({
   ]
 });
 </script>
-
-<style scoped>
-.chart {
-  height: 50vh;
-}
-</style>

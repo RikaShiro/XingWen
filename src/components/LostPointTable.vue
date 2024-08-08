@@ -3,7 +3,7 @@
 </template>
 
 <script setup>
-import { ref, inject } from 'vue';
+import { ref } from 'vue';
 
 const lostPointColumns = [
   {
@@ -41,7 +41,4 @@ const lostPointData = ref([
     lostRate: 80.29,
   }
 ])
-
-// const refresh = inject('refresh')
-// refresh(lostPointData)
 </script>
