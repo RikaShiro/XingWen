@@ -1,5 +1,9 @@
 <template>
-  <a-table :columns="lostPointColumns" :data-source="lostPointData" :pagination="false" height="400px"></a-table>
+  <div>
+    <a-table :columns="lostPointColumns" :data-source="lostPointData" :pagination="false" height="400px"
+      class="lost-point-table"></a-table>
+    <h2 class="lost-point-table-caption">1班</h2>
+  </div>
 </template>
 
 <script setup>
@@ -42,3 +46,14 @@ const lostPointData = ref([
   }
 ])
 </script>
+
+<style>
+.lost-point-table {
+  border: 1px solid black;
+}
+
+h2.lost-point-table-caption {
+  text-align: center;
+  margin-top: 12px;
+}
+</style>

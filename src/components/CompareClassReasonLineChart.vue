@@ -28,7 +28,8 @@ use([
 
 const option = ref({
   title: {
-    text: '班级错因分析对比'
+    text: '班级错因分析对比',
+    left: 'center'
   },
   tooltip: {
     trigger: 'axis'

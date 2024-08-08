@@ -13,10 +13,17 @@
   </div>
 
   <div class="grid-column-4">
-    <LostPointTable class="lost-point-table"></LostPointTable>
-    <LostPointTable class="lost-point-table"></LostPointTable>
-    <LostPointTable class="lost-point-table"></LostPointTable>
-    <LostPointTable class="lost-point-table"></LostPointTable>
+    <LostPointTable></LostPointTable>
+    <LostPointTable></LostPointTable>
+    <LostPointTable></LostPointTable>
+    <LostPointTable></LostPointTable>
+  </div>
+
+  <div class="grid-column-2">
+    <ReasonTable class="reason-table"></ReasonTable>
+    <ReasonTable class="reason-table"></ReasonTable>
+    <ReasonTable class="reason-table"></ReasonTable>
+    <ReasonTable class="reason-table"></ReasonTable>
   </div>
 
   <div class="grid-column-2">
@@ -27,12 +34,13 @@
 </template>
 
 <script setup>
-import { ref, provide } from 'vue';
+import { ref } from 'vue';
 
 import CompareClassDistributionBarChart from '@/components/CompareClassDistributionBarChart.vue'
 import GradeDistributionBarChart from '@/components/GradeDistributionBarChart.vue'
 import LostPointTable from '@/components/LostPointTable.vue';
 import CompareClassReasonLineChart from '@/components/CompareClassReasonLineChart.vue';
+import ReasonTable from '@/components/ReasonTable.vue';
 
 const value = ref(8)
 const options = ref([])
@@ -74,8 +82,8 @@ const modeOptions = ref([
 div.grid-column-2 {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  margin-top: 24px;
-  margin-bottom: 24px;
+  margin: 36px auto;
+  gap: 24px;
 }
 
 .chart {
@@ -85,10 +93,7 @@ div.grid-column-2 {
 div.grid-column-4 {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin: 36px auto;
   gap: 24px;
-}
-
-.lost-point-table {
-  border: 1px solid black;
 }
 </style>
