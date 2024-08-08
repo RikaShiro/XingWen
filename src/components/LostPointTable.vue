@@ -2,12 +2,13 @@
   <div>
     <a-table :columns="lostPointColumns" :data-source="lostPointData" :pagination="false" height="400px"
       class="lost-point-table"></a-table>
-    <h2 class="lost-point-table-caption">1班</h2>
+    <h2 class="lost-point-table-caption">{{ props.classIdx }}班</h2>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+const props = defineProps(['classIdx'])
 
 const lostPointColumns = [
   {

@@ -16,6 +16,8 @@ import {
 import VChart from 'vue-echarts';
 import { ref } from 'vue';
 
+const props = defineProps(['classIndices'])
+
 use([
   CanvasRenderer,
   LineChart,
@@ -29,15 +31,17 @@ use([
 const option = ref({
   title: {
     text: '班级错因分析对比',
-    left: 'center'
+    left: 'center',
+    top: 0
   },
   tooltip: {
     trigger: 'axis'
   },
   legend: {
-    data: ['Email', 'Union Ads', 'Video Ads', 'Direct', 'Search Engine']
+    top: 40
   },
   grid: {
+    top: 80,
     left: '3%',
     right: '4%',
     bottom: '3%',
@@ -61,7 +65,7 @@ const option = ref({
   },
   series: [
     {
-      name: '1班',
+      name: `${props.classIndices[0]}班`,
       type: 'line',
       data: [15.23, 20.12, 10.45, 18.34, 14.56],
       label: {
@@ -73,7 +77,7 @@ const option = ref({
       },
     },
     {
-      name: '2班',
+      name: `${props.classIndices[1]}班`,
       type: 'line',
       data: [21.30, 0.20, 28.45, 10.00, 40.05],
       label: {

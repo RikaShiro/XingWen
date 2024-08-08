@@ -16,12 +16,13 @@
       </template>
     </a-table>
 
-    <h2 class="reason-table-caption">1班</h2>
+    <h2 class="reason-table-caption">{{ props.classIdx }}班</h2>
   </div>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+const props = defineProps(['classIdx'])
 
 const reasonColumns = [
   {

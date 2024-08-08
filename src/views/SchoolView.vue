@@ -8,27 +8,23 @@
   </a-select>
 
   <div class="grid-column-2">
-    <GradeDistributionBarChart class="chart"></GradeDistributionBarChart>
-    <CompareClassDistributionBarChart class="chart"></CompareClassDistributionBarChart>
+    <GradeDistributionBarChart class="bar-chart"></GradeDistributionBarChart>
+    <CompareClassDistributionBarChart class="bar-chart"></CompareClassDistributionBarChart>
   </div>
 
   <div class="grid-column-4">
-    <LostPointTable></LostPointTable>
-    <LostPointTable></LostPointTable>
-    <LostPointTable></LostPointTable>
-    <LostPointTable></LostPointTable>
+    <LostPointTable v-for="idx in [1, 2, 3, 4]" :class-idx="idx"></LostPointTable>
   </div>
 
   <div class="grid-column-2">
-    <ReasonTable class="reason-table"></ReasonTable>
-    <ReasonTable class="reason-table"></ReasonTable>
-    <ReasonTable class="reason-table"></ReasonTable>
-    <ReasonTable class="reason-table"></ReasonTable>
+    <ReasonTable class="reason-table" v-for="idx in [1, 2, 3, 4]" :class-idx="idx"></ReasonTable>
   </div>
 
   <div class="grid-column-2">
-    <CompareClassReasonLineChart class="compare-class-reason"></CompareClassReasonLineChart>
-    <CompareClassReasonLineChart class="compare-class-reason"></CompareClassReasonLineChart>
+    <CompareClassReasonLineChart class="compare-class-reason" :class-indices="[1, 2]">
+    </CompareClassReasonLineChart>
+    <CompareClassReasonLineChart class="compare-class-reason" :class-indices="[3, 4]">
+    </CompareClassReasonLineChart>
   </div>
 
 </template>
@@ -75,8 +71,13 @@ const modeOptions = ref([
 
 <style scoped>
 .mode-select {
-  margin-left: 20px;
-  margin-bottom: 20px;
+  margin-left: 24px;
+  margin-bottom: 24px;
+}
+
+.bar-chart,
+.compare-class-reason {
+  height: 50vh;
 }
 
 div.grid-column-2 {
@@ -84,10 +85,6 @@ div.grid-column-2 {
   grid-template-columns: repeat(2, 1fr);
   margin: 36px auto;
   gap: 24px;
-}
-
-.chart {
-  height: 50vh;
 }
 
 div.grid-column-4 {
